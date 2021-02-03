@@ -9,31 +9,14 @@ import Gallery from "../components/gallery/gallery"
 import About from "../components/about"
 import Contact from "../components/contact"
 
-
 const IndexPage = ({data}) => {
   return (
     <Layout>
-      <Hero id="top">
-        <h1>Sakib Chowdhury</h1>
-        {/* <p>Artist, Engineer</p> */}
-      </Hero>
+      <Hero id="top"/>
 
-      <Nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <a href="#links">Links</a>
-        <a href="#top">Top</a>
-      </Nav>
+      <Nav/>
 
-      <About id="about">
-        <h2>About</h2>
-        <p>Hi, I'm Sakib Chowdhury. I like making things.</p>
-        <p>You can see some of the things I've made on this site. Just keep scrolling.</p>
-
-        <a href="#">Résumé</a>
-        {/* <a href="#">Download</a> */}
-      </About>
+      <About id="about"/>
 
       <Gallery id="projects">
         <h2>Projects</h2>
@@ -49,13 +32,7 @@ const IndexPage = ({data}) => {
         ))}
       </Gallery>
 
-      <Contact id="contact">
-        <h2>Contact</h2>
-        <p>Email: sakib_c@outlook.com</p>
-        <p>Or, fill out this form:</p>
-
-        <h2 id="links">Links</h2>
-      </Contact>
+      <Contact id="contact"/>
     </Layout>
   )
 }

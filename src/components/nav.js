@@ -3,14 +3,14 @@ import  { css } from "@emotion/react"
 import { cssGroup, rhythmpx, vhpx } from "./global-css"
 import { rhythm } from "../utils/typography"
 
-export default function Nav({ children }) {
+export default function Nav() {
   const [navOverBody, setNavOverBody] = useState(false)
 
   let throttleTimeout = null
 
   const handleScroll = () => {
     if (throttleTimeout === null) {
-      throttleTimeout = requestAnimationFrame(() => {
+      throttleTimeout = setInterval(() => {
         if (window.scrollY >= vhpx(80) - rhythmpx(2)) {
           if (!navOverBody) {
             setNavOverBody(true)
@@ -22,7 +22,7 @@ export default function Nav({ children }) {
         }
 
         throttleTimeout = null
-      })
+      }, 100)
     }
   }
 
@@ -43,6 +43,7 @@ export default function Nav({ children }) {
         margin-top: -${rhythm(2)};
         z-index: 10;
         transition: background 0.2s, box-shadow 0.2s;
+        text-shadow: ${rhythm(0.04)} ${rhythm(0.06)} #000;
 
         a {
           color: white;
@@ -51,9 +52,14 @@ export default function Nav({ children }) {
           transition: color 0.2s;
         }
 
+        a:last-of-type {
+          padding-right: 0;
+        }
+
         ${navOverBody && `
           background-color: #faf6f6;
           box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
+          text-shadow: none;
           a {
             color: black;
           }
@@ -61,9 +67,23 @@ export default function Nav({ children }) {
       `}
     >
       <div className="nav-group"
-        css={cssGroup}
-      >
-        {children}
+        css={css`
+          ${cssGroup};
+          display: flex;
+      `}>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="#links">Links</a>
+
+        {navOverBody &&
+          <a
+            css={css`
+              flex-grow: 1;
+              text-align: right;
+            `}
+            className={navOverBody ? "fadeIn" : "fadeOut"} href="#top">Back to Top</a>
+        }
       </div>
     </nav>
   )

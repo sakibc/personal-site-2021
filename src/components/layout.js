@@ -11,9 +11,10 @@ export default function Layout({ children }) {
       <footer
         css={css`
           text-align: center;
-          background: cornflowerblue;
+          background: #1767a8;
           color: white;
           padding: ${rhythm(0.4)};
+          box-shadow: inset 0 15px 15px -15px rgba(0, 0, 0, 0.4);
           p {
             margin: 0;
             font-size: ${rhythm(0.6)};

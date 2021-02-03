@@ -159,6 +159,10 @@ export function cloudsCanvas(ref) {
 
     return false;
   }
+
+  const lowerGradient = ctx.createLinearGradient(0, 0, 0, 150)
+  lowerGradient.addColorStop(0, "rgba(0, 0, 0, 0)")
+  lowerGradient.addColorStop(1, "rgba(0, 0, 0, 0.5)")
   
   function drawCanvas(now) {
     ctx.resetTransform();
@@ -225,30 +229,35 @@ export function cloudsCanvas(ref) {
     if (tick == clodXOffset) {
       tick = 0;
 
-      let tempClods = [];
+      let tempClods = []
 
       for (let i = 0; i < handsomeClods.length; i++) {
-        handsomeClods[i].update();
+        handsomeClods[i].update()
 
         if (handsomeClods[i].live) {
-          tempClods.push(handsomeClods[i]);
+          tempClods.push(handsomeClods[i])
         }
       }
 
-      handsomeClods = tempClods;
+      handsomeClods = tempClods
     }
 
-    ctx.resetTransform();
+    ctx.resetTransform()
 
-    ctx.fillStyle = "rgba(0, 20, 50, 0.3)";
-    ctx.globalCompositeOperation = "source-atop";
-    ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = "rgba(0, 20, 50, 0.45)"
+    ctx.globalCompositeOperation = "source-atop"
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+    ctx.globalCompositeOperation = "source-over"
 
-    ctx.drawImage(myBuffer, (canvas.clientWidth/2) - 50, canvas.clientHeight - myBuffer.height + 50);
+    ctx.translate(0, canvas.height - 150);
+    ctx.fillStyle = lowerGradient
+    ctx.fillRect(0, 0, canvas.clientWidth, 150)
+    ctx.resetTransform()
+
+    ctx.drawImage(myBuffer, (canvas.clientWidth/2) - 50, canvas.clientHeight - myBuffer.height + 50)
     
-    requestAnimationFrame(drawCanvas);
+    requestAnimationFrame(drawCanvas)
   }
 
-  return requestAnimationFrame(drawCanvas);
+  return requestAnimationFrame(drawCanvas)
 }
