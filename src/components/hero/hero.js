@@ -1,23 +1,25 @@
-import React from "react"
-import { useState } from "react"
-import  { css } from "@emotion/react"
-import { rhythm } from "../../utils/typography"
-import { cssContainer, cssGroup } from "../global-css"
-import Clouds from "./clouds"
+import React, { useState } from 'react'
+
+import { css } from '@emotion/react'
+import { rhythm } from '../../utils/typography'
+import { cssContainer, cssGroup } from '../global-css'
+import Clouds from './clouds'
 import Typist from 'react-typist'
 
-export default function Hero({ id }) {
+export default function Hero ({ id }) {
   const [typeTagline, setTypeTagline] = useState(false)
 
   return (
-    <section id={id} className="hero-container"
+    <section
+      id={id} className='hero-container'
       css={css`
         ${cssContainer};
         height: 80vh;
         background: #1767a8;
       `}
     >
-      <div className="hero-group" css={css`
+      <div
+        className='hero-group' css={css`
         ${cssGroup};
         // display: flex;
         // flex-flow: column nowrap;
@@ -41,15 +43,17 @@ export default function Hero({ id }) {
           text-align: left;
         }
 
-      `}>
+      `}
+      >
         <h1>
           <Typist
             avgTypingDelay={35}
             cursor={{
               element: '▍',
-              hideWhenDone: true,
+              hideWhenDone: true
             }}
-            onTypingDone={() => {setInterval(() => {setTypeTagline(true)}, 1000)}}>
+            onTypingDone={() => { setInterval(() => { setTypeTagline(true) }, 1000) }}
+          >
             <Typist.Delay ms={500} />
             Sakib Chowdhury
           </Typist>
@@ -58,14 +62,15 @@ export default function Hero({ id }) {
           <Typist
             avgTypingDelay={35}
             cursor={{
-              element: '▍',
-            }}>
+              element: '▍'
+            }}
+          >
             <Typist.Delay ms={1500} />
             artist, engineer
           </Typist>
         </h2>}
       </div>
-      <Clouds/>
+      <Clouds />
     </section>
   )
 }

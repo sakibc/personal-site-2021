@@ -1,5 +1,5 @@
-import  { css } from "@emotion/react"
-import { rhythm } from "../utils/typography"
+import { css } from '@emotion/react'
+import { rhythm } from '../utils/typography'
 
 export const cssGroup = css`
   width: min(100vw, 960px);
@@ -21,10 +21,10 @@ export const cssGlobal = css`
 
 export const fontSize = parseInt(getComputedStyle(document.documentElement).fontSize)
 
-export function vhpx(value) {
-  return window.innerHeight*(value/100)
+export function vhpx (value) {
+  return window.innerHeight * (value / 100)
 }
 
-export function rhythmpx(value) {
-  return fontSize*parseFloat(rhythm(value))
+export function rhythmpx (value) {
+  return fontSize * parseFloat(rhythm(value))
 }

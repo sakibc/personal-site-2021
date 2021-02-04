@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import  { css } from "@emotion/react"
-import { cssGroup, rhythmpx, vhpx } from "./global-css"
-import { rhythm } from "../utils/typography"
+import React, { useState, useEffect } from 'react'
+import { css } from '@emotion/react'
+import { cssGroup, rhythmpx, vhpx } from './global-css'
+import { rhythm } from '../utils/typography'
 
-export default function Nav() {
+export default function Nav () {
   const [navOverBody, setNavOverBody] = useState(false)
 
   let throttleTimeout = null
@@ -66,15 +66,17 @@ export default function Nav() {
         `}
       `}
     >
-      <div className="nav-group"
+      <div
+        className='nav-group'
         css={css`
           ${cssGroup};
           display: flex;
-      `}>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <a href="#links">Links</a>
+      `}
+      >
+        <a href='#about'>About</a>
+        <a href='#projects'>Projects</a>
+        <a href='#contact'>Contact</a>
+        <a href='#links'>Links</a>
 
         {navOverBody &&
           <a
@@ -82,8 +84,9 @@ export default function Nav() {
               flex-grow: 1;
               text-align: right;
             `}
-            className={navOverBody ? "fadeIn" : "fadeOut"} href="#top">Back to Top</a>
-        }
+            className={navOverBody ? 'fadeIn' : 'fadeOut'} href='#top'
+          >Back to Top
+          </a>}
       </div>
     </nav>
   )

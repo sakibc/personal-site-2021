@@ -1,24 +1,24 @@
 module.exports = {
   siteMetadata: {
-    title: "personal-site",
+    title: 'personal-site'
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `data`,
+        name: 'data',
         path: `${__dirname}/src/data`
-      },
+      }
     },
-    `gatsby-transformer-remark`,
+    'gatsby-transformer-remark',
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: `src/utils/typography`,
-      },
+        pathToConfigModule: 'src/utils/typography'
+      }
     },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-emotion`,
-  ],
-};
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-emotion'
+  ]
+}
