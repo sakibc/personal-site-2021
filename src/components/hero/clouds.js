@@ -1,17 +1,16 @@
-import React from "react"
-import { useRef, useEffect } from "react"
-import { css } from "@emotion/react"
-import { cloudsCanvas } from "./cloudsCanvas"
+import React, { useRef, useEffect } from 'react'
 
-export default function Clouds(props) {
+import { css } from '@emotion/react'
+import { cloudsCanvas, cloudsCancel } from './cloudsCanvas'
+
+export default function Clouds (props) {
   const ref = useRef()
-  let requestId;
 
   useEffect(() => {
-    requestId = cloudsCanvas(ref)
+    cloudsCanvas(ref)
 
-    return () => cancelAnimationFrame(requestId)
-  }, []);
+    return () => cloudsCancel()
+  }, [])
 
   return (
     <canvas
