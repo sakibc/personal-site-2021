@@ -1,16 +1,17 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 import { css } from '@emotion/react'
-import { cloudsCanvas, cloudsCancel } from './cloudsCanvas'
+import { CloudsCanvas } from './cloudsCanvas'
 
 export default function Clouds (props) {
   const ref = useRef()
+  const [clouds, setClouds] = useState(new CloudsCanvas(ref, props.loadedCallback))
 
   useEffect(() => {
-    cloudsCanvas(ref, props.loadedCallback)
+    clouds.start()
 
-    return () => cloudsCancel()
-  }, [])
+    return () => clouds.cancel()
+  })
 
   return (
     <canvas
