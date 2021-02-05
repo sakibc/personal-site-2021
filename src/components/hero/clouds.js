@@ -5,7 +5,7 @@ import { CloudsCanvas } from './cloudsCanvas'
 
 export default function Clouds (props) {
   const ref = useRef()
-  const [clouds, setClouds] = useState(new CloudsCanvas(ref, props.loadedCallback))
+  const [clouds] = useState(new CloudsCanvas(ref, props.loadedCallback))
 
   useEffect(() => {
     clouds.start()

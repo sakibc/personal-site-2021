@@ -44,25 +44,26 @@ export function CloudsCanvas (ref, loadedCallback) {
 
   this.initialized = false
 
+  this.coveringWidth = 0
+  this.coveringHeight = 0
+  this.max_i = 0
+  this.max_j = 0
+
+  this.clodBuffer = createBuffer(120, 68)
+  this.handsomeClodBuffer = createBuffer(120, 68)
+  this.tinyClodBuffer = createBuffer(90, 51)
+  this.superTinyClodBuffer = createBuffer(30, 17)
+  this.myBuffer = createBuffer(467, 309)
+
+  this.requestId = 0
+
   const canvasAngle = (Math.PI / 180) * (-10)
   const clodXOffset = 200
   const clodYOffset = 100
   const delta_t = 0.2
 
   this.init = () => {
-    this.coveringWidth = 0
-    this.coveringHeight = 0
-    this.max_i = 0
-    this.max_j = 0
-
-    this.clodBuffer = createBuffer(120, 68)
-    this.handsomeClodBuffer = createBuffer(120, 68)
-    this.tinyClodBuffer = createBuffer(90, 51)
-    this.superTinyClodBuffer = createBuffer(30, 17)
-    this.myBuffer = createBuffer(467, 309)
-
     this.canvas = this.ref.current
-    this.requestId = 0
   
     this.ctx = this.canvas.getContext('2d')
 
@@ -253,7 +254,7 @@ export function CloudsCanvas (ref, loadedCallback) {
 
     this.ctx.drawImage(this.myBuffer, (this.canvas.width / 2) - 50, this.canvas.height - this.myBuffer.height + 50)
 
-    this.cloudsRequestId = requestAnimationFrame(this.drawCanvas)
+    this.requestId = requestAnimationFrame(this.drawCanvas)
   }
 
   this.cancel = () => {
@@ -266,6 +267,6 @@ export function CloudsCanvas (ref, loadedCallback) {
       this.initialized = true
     }
 
-    this.cloudsRequestId = requestAnimationFrame(this.drawCanvas)
+    this.requestId = requestAnimationFrame(this.drawCanvas)
   }
 }
