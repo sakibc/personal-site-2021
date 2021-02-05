@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout renders correctly 1`] = `
+<div
+  css={
+    Object {
+      "map": undefined,
+      "name": "59e5dt",
+      "next": undefined,
+      "styles": "
+  .gatsby-image-wrapper {
+    margin-bottom: 1.3rem;
+  }
+",
+      "toString": [Function],
+    }
+  }
+>
+  <footer
+    css={
+      Object {
+        "map": undefined,
+        "name": "1j84tv4",
+        "next": undefined,
+        "styles": "
+          text-align: center;
+          background: #1767a8;
+          color: white;
+          padding: 0.52rem;
+          box-shadow: inset 0 15px 15px -15px rgba(0, 0, 0, 0.4);
+          p {
+            margin: 0;
+            font-size: 0.78rem;
+          }
+        ",
+        "toString": [Function],
+      }
+    }
+  >
+    <p>
+      Made with Gatsby and React
+    </p>
+    <p>
+      © 2021 Sakib Chowdhury - All rights reserved
+    </p>
+  </footer>
+</div>
+`;
