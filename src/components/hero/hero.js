@@ -8,6 +8,11 @@ import Typist from 'react-typist'
 
 export default function Hero ({ id }) {
   const [typeTagline, setTypeTagline] = useState(false)
+  const [loaded, setLoaded] = useState(false)
+
+  function loadedCallback() {
+    setLoaded(true)
+  }
 
   return (
     <section
@@ -18,7 +23,7 @@ export default function Hero ({ id }) {
         background: #1767a8;
       `}
     >
-      <div
+      {loaded && <div
         className='hero-group' css={css`
         ${cssGroup};
         // display: flex;
@@ -37,7 +42,7 @@ export default function Hero ({ id }) {
         h2 {
           font-size: ${rhythm(2)};
           margin: 0;
-          padding-left: ${rhythm(0.9)};
+          padding-left: ${rhythm(1.7)};
           color: white;
           text-shadow: ${rhythm(0.08)} ${rhythm(0.15)} #000;
           text-align: left;
@@ -69,8 +74,8 @@ export default function Hero ({ id }) {
             artist, engineer
           </Typist>
         </h2>}
-      </div>
-      <Clouds />
+      </div>}
+      <Clouds loadedCallback={loadedCallback}/>
     </section>
   )
 }

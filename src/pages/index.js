@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
@@ -18,18 +17,8 @@ const IndexPage = ({ data }) => {
 
       <About id='about' />
 
-      <Gallery id='projects'>
+      <Gallery id='projects' data={data}>
         <h2>Projects</h2>
-
-        {data.allFile.edges.map(({ node }, index) => (
-          <div key={index}>
-            <h3>{node.childMarkdownRemark.frontmatter.title}</h3>
-            {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-              <Img key={index} fixed={image.childImageSharp.fixed} />
-            ))}
-            <div dangerouslySetInnerHTML={{ __html: node.childMarkdownRemark.html }} />
-          </div>
-        ))}
       </Gallery>
 
       <Contact id='contact' />

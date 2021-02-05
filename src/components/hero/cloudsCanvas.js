@@ -3,6 +3,8 @@ import HandsomeClodImg from './handsome_clod.svg'
 import Glasses from './glasses.svg'
 import Coding from './coding.svg'
 
+let cloudsRequestId
+
 function loadImage (url) {
   return new Promise((resolve, reject) => {
     const img = new Image()
@@ -12,13 +14,37 @@ function loadImage (url) {
   })
 }
 
-let cloudsRequestId
+function createBuffer (width, height) {
+  const buffer = document.createElement('canvas')
+  buffer.width = width
+  buffer.height = height
+
+  return buffer
+}
+
+function loadBuffer (buffer, img) {
+  const bufferCtx = buffer.getContext('2d')
+  bufferCtx.drawImage(img, 0, 0, buffer.width, buffer.height)
+}
+
+function changeBufferColor (buffer, color) {
+  const bufferCtx = buffer.getContext('2d')
+  bufferCtx.globalCompositeOperation = 'source-atop'
+  bufferCtx.fillStyle = color
+  bufferCtx.fillRect(0, 0, buffer.width, buffer.height)
+  bufferCtx.globalCompositeOperation = 'source-over'
+}
+
+function drawOnBuffer (buffer, img, x, y, width, height) {
+  const bufferCtx = buffer.getContext('2d')
+  bufferCtx.drawImage(img, x, y, width, height)
+}
 
 export function cloudsCancel () {
   cancelAnimationFrame(cloudsRequestId)
 }
 
-export function cloudsCanvas (ref) {
+export function cloudsCanvas (ref, loadedCallback) {
   const canvas = ref.current
 
   const ctx = canvas.getContext('2d')
@@ -26,66 +52,39 @@ export function cloudsCanvas (ref) {
   let coveringHeight = 0
   const canvasAngle = (Math.PI / 180) * (-10)
 
-  let init = false
-
   const clodXOffset = 200
   const clodYOffset = 100
+
+  const delta_t = 0.2
 
   let max_i = 0
   let max_j = 0
 
-  const clodBuffer = document.createElement('canvas')
-  clodBuffer.width = 120
-  clodBuffer.height = 68
-  const handsomeClodBuffer = document.createElement('canvas')
-  handsomeClodBuffer.width = 120
-  handsomeClodBuffer.height = 68
-  const tinyClodBuffer = document.createElement('canvas')
-  tinyClodBuffer.width = 90
-  tinyClodBuffer.height = 51
-  const superTinyClodBuffer = document.createElement('canvas')
-  superTinyClodBuffer.width = 30
-  superTinyClodBuffer.height = 17
+  const clodBuffer = createBuffer(120, 68)
+  const handsomeClodBuffer = createBuffer(120, 68)
+  const tinyClodBuffer = createBuffer(90, 51)
+  const superTinyClodBuffer = createBuffer(30, 17)
+  const myBuffer = createBuffer(467, 309)
 
-  const myBuffer = document.createElement('canvas')
-  myBuffer.width = 467
-  myBuffer.height = 309
+  const images = [Coding, Clod, HandsomeClodImg, Glasses]
+  Promise.all(images.map(imgFile => loadImage(imgFile)))
+  .then(imgs => {
+    loadBuffer(myBuffer, imgs[0])
+    loadBuffer(clodBuffer, imgs[1])
 
-  Promise.all([loadImage(Coding), loadImage(Clod),
-    loadImage(HandsomeClodImg), loadImage(Glasses)])
-    .then(imgs => {
-      const me = imgs[0]
-      const myBufferCtx = myBuffer.getContext('2d')
-      myBufferCtx.drawImage(me, 0, 0)
+    const handsomeBuffers = [handsomeClodBuffer, tinyClodBuffer, superTinyClodBuffer]
+    handsomeBuffers.map(buffer => loadBuffer(buffer, imgs[2]))
 
-      const clod = imgs[1]
-      const clodBufferCtx = clodBuffer.getContext('2d')
-      clodBufferCtx.drawImage(clod, 0, 0)
+    changeBufferColor(tinyClodBuffer, '#e9fcff')
+    changeBufferColor(superTinyClodBuffer, '#c6f7ff')
+    drawOnBuffer(superTinyClodBuffer, imgs[3], 15, 4, 15, 6)
 
-      const handsomeClod = imgs[2]
-      const glasses = imgs[3]
+    const clodBuffers = [clodBuffer, handsomeClodBuffer, tinyClodBuffer, superTinyClodBuffer]
+    clodBuffers.map(buffer => changeBufferColor(buffer, 'rgba(0, 20, 50, 0.45)'))
 
-      const handsomeClodCtx = handsomeClodBuffer.getContext('2d')
-      handsomeClodCtx.clearRect(0, 0, handsomeClodBuffer.width, handsomeClodBuffer.height)
-      handsomeClodCtx.drawImage(handsomeClod, 0, 0)
-
-      const tinyClodCtx = tinyClodBuffer.getContext('2d')
-      tinyClodCtx.clearRect(0, 0, tinyClodBuffer.width, tinyClodBuffer.height)
-      tinyClodCtx.drawImage(handsomeClod, 0, 0, tinyClodBuffer.width, tinyClodBuffer.height)
-      tinyClodCtx.globalCompositeOperation = 'source-in'
-      tinyClodCtx.fillStyle = '#e9fcff'
-      tinyClodCtx.fillRect(0, 0, tinyClodBuffer.width, tinyClodBuffer.height)
-      tinyClodCtx.globalCompositeOperation = 'source-over'
-
-      const superTinyClodCtx = superTinyClodBuffer.getContext('2d')
-      superTinyClodCtx.clearRect(0, 0, superTinyClodBuffer.width, superTinyClodBuffer.height)
-      superTinyClodCtx.drawImage(handsomeClod, 0, 0, superTinyClodBuffer.width, superTinyClodBuffer.height)
-      superTinyClodCtx.globalCompositeOperation = 'source-in'
-      superTinyClodCtx.fillStyle = '#c6f7ff'
-      superTinyClodCtx.fillRect(0, 0, superTinyClodBuffer.width, superTinyClodBuffer.height)
-      superTinyClodCtx.globalCompositeOperation = 'source-over'
-      superTinyClodCtx.drawImage(glasses, 15, 4, 15, 6)
-    })
+    resize(canvas, true)
+    loadedCallback()
+  })
 
   let tick = 60
 
@@ -113,9 +112,9 @@ export function cloudsCanvas (ref) {
 
     this.update = function () {
       if (this.superTiny) {
-        this.x += 6
+        this.x += 1.2
       } else {
-        this.x += 2
+        this.x += 0.4
       }
       if (this.x > coveringWidth) {
         this.live = false
@@ -133,12 +132,12 @@ export function cloudsCanvas (ref) {
     return false
   }
 
-  function resize (canvas) {
+  function resize (canvas, init = false) {
     const displayWidth = canvas.clientWidth
     const displayHeight = canvas.clientHeight
 
     if ((displayWidth !== canvas.width ||
-        displayHeight !== canvas.height) || !init) {
+        displayHeight !== canvas.height) || init) {
       coveringWidth = Math.ceil(displayWidth * Math.cos(Math.abs(canvasAngle)) +
                             displayHeight * Math.sin(Math.abs(canvasAngle)))
       coveringHeight = Math.ceil(displayWidth * Math.sin(Math.abs(canvasAngle)) +
@@ -155,8 +154,6 @@ export function cloudsCanvas (ref) {
 
       const obj = new HandsomeClod(Math.floor(Math.random() * max_i), Math.floor(Math.random() * max_j))
       handsomeClods.push(obj)
-
-      init = true
 
       return true
     }
@@ -179,7 +176,7 @@ export function cloudsCanvas (ref) {
     ctx.translate(-canvas.width / 2, -canvas.height / 2)
 
     // generate and draw tiny clouds
-    if (Math.random() > 0.99) {
+    if (Math.random() > 0.9975) {
       const obj = new TinyClod(Math.floor(Math.random() * canvas.height))
       tinyClods.push(obj)
     }
@@ -227,9 +224,9 @@ export function cloudsCanvas (ref) {
       }
     }
 
-    tick += 1
+    tick += delta_t
 
-    if (tick === clodXOffset) {
+    if (tick >= clodXOffset) {
       tick = 0
 
       const tempClods = []
@@ -246,11 +243,6 @@ export function cloudsCanvas (ref) {
     }
 
     ctx.resetTransform()
-
-    ctx.fillStyle = 'rgba(0, 20, 50, 0.45)'
-    ctx.globalCompositeOperation = 'source-atop'
-    ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight)
-    ctx.globalCompositeOperation = 'source-over'
 
     ctx.translate(0, canvas.height - 150)
     ctx.fillStyle = lowerGradient

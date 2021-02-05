@@ -7,7 +7,7 @@ export default function Clouds (props) {
   const ref = useRef()
 
   useEffect(() => {
-    cloudsCanvas(ref)
+    cloudsCanvas(ref, props.loadedCallback)
 
     return () => cloudsCancel()
   }, [])
