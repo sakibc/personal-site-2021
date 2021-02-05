@@ -97,14 +97,15 @@ export function CloudsCanvas (ref, loadedCallback) {
   this.handsomeClods = []
   this.tinyClods = []
 
-  function HandsomeClod (i, j) {
+  function HandsomeClod (i, j, parent) {
+    this.parent = parent
     this.i = i
     this.j = j
     this.live = true
 
     this.update = function () {
       this.i += 1
-      if (this.i > this.max_i) {
+      if (this.i > this.parent.max_i) {
         this.live = false
       }
     }
@@ -159,7 +160,7 @@ export function CloudsCanvas (ref, loadedCallback) {
       this.handsomeClods = []
       this.tinyClods = []
 
-      const obj = new HandsomeClod(Math.floor(Math.random() * this.max_i), Math.floor(Math.random() * this.max_j))
+      const obj = new HandsomeClod(Math.floor(Math.random() * this.max_i), Math.floor(Math.random() * this.max_j), this)
       this.handsomeClods.push(obj)
 
       return true
@@ -214,7 +215,7 @@ export function CloudsCanvas (ref, loadedCallback) {
           // mayhaps consider generating a handsome clod
           // if we're just starting off
           if (Math.random() > 0.95) {
-            const obj = new HandsomeClod(i, j)
+            const obj = new HandsomeClod(i, j, this)
             this.handsomeClods.push(obj)
           }
         }
