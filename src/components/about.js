@@ -1,13 +1,13 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
-import { cssContainer, cssGroup } from './global-css'
+import { cssContainer, cssGroup } from './global'
 
-import Development from '../images/development.png'
-import Development2x from '../images/development@2x.png'
-import Development3x from '../images/development@3x.png'
+import Standing from '../images/standing.png'
+import Standing2x from '../images/standing@2x.png'
+import Standing3x from '../images/standing@3x.png'
 
-export default function About ({ id, children }) {
+export default function About ({ id }) {
   return (
     <section
       id={id} className='about-container' css={css`
@@ -17,38 +17,57 @@ export default function About ({ id, children }) {
       <div
         className='about-group' css={css`
         ${cssGroup};
-        display: flex;
+        display: grid;
+        grid-template-rows: 1fr auto auto auto 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "images space1"
+          "images title"
+          "images copy"
+          "images resume"
+          "images space2";
+        justify-items: center;
+        align-items: center;
+        grid-gap: ${rhythm(1)};
       `}
       >
         <img
           css={css`
-          margin-right: ${rhythm(0.5)};
-          padding-top: ${rhythm(1)};
-          flex: 1 1 0;
-          width: 0;
-        `} src={Development} srcSet={`${Development2x} 2x, ${Development3x} 3x`}
+          grid-area: images;
+          margin: ${rhythm(3)} 0 ${rhythm(2)} 0;
+        `}
+          src={Standing}
+          alt="cartoon Sakib standing and smiling"
+          srcSet={`${Standing2x} 2x, ${Standing3x} 3x`}
         />
+        <h2 css={css`
+          grid-area: title;
+          margin: 0;
+        `}>About</h2>
         <div css={css`
-          margin-left: ${rhythm(0.5)};
-          flex: 1 1 0;
-          width: 0;
-          display: flex;
-          flex-flow: column nowrap;
-          justify-content: center;
+          grid-area: copy;
           text-align: center;
+          p:last-child {
+            margin-bottom: 0;
+          }
         `}
         >
-          <h2 css={css`margin-top: 0;`}>About</h2>
           <p>Hi, I'm Sakib Chowdhury. I like making things.</p>
           <p>You can see some of the things I've made on this site. Just keep scrolling.</p>
-
-          <a
-            href='#' css={css`
-              margin-top: ${rhythm(1)};
-            `}
-          >Download Résumé
-          </a>
         </div>
+        <a
+          href='/resume-sakib-chowdhury-jan-2021.pdf' css={css`
+            grid-area: resume;
+            text-decoration: none;
+            background: #1767a8;
+            color: white;
+            padding: ${rhythm(0.75)} ${rhythm(1)};
+            border-radius: ${rhythm(2)};
+            margin-top: ${rhythm(0.5)};
+            box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+          `}
+        >Download Résumé
+        </a>
       </div>
     </section>
   )

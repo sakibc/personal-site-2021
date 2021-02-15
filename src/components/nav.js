@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
-import { cssGroup, rhythmpx, vhpx } from './global-css'
+import { cssGroup, rhythmpx, vhpx } from './global'
 import { rhythm } from '../utils/typography'
 
 export default function Nav () {
@@ -74,7 +74,7 @@ export default function Nav () {
       `}
       >
         <a href='#about'>About</a>
-        <a href='#projects'>Projects</a>
+        <a href='#gallery'>Gallery</a>
         <a href='#contact'>Contact</a>
         <a href='#links'>Links</a>
 

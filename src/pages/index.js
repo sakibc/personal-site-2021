@@ -12,15 +12,9 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Hero id='top' />
-
       <Nav />
-
       <About id='about' />
-
-      <Gallery id='projects' data={data}>
-        <h2>Projects</h2>
-      </Gallery>
-
+      <Gallery id='gallery' data={data} />
       <Contact id='contact' />
     </Layout>
   )

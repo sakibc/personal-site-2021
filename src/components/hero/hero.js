@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
-import { cssContainer, cssGroup } from '../global-css'
+import { cssContainer, cssGroup } from '../global'
 import Clouds from './clouds'
 import Typist from 'react-typist'
 

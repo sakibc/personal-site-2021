@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About renders correctly 1`] = `
+<section
+  className="about-container css-wk2qjz-cssContainer-cssContainer-About-About"
+>
+  <div
+    className="about-group css-no7asv-cssGroup-cssGroup-About-About"
+  >
+    <img
+      alt="cartoon Sakib standing and smiling"
+      className="css-ha47da-About-About"
+      src="test-file-stub"
+      srcSet="test-file-stub 2x, test-file-stub 3x"
+    />
+    <h2
+      className="css-pqhr6s-About"
+    >
+      About
+    </h2>
+    <div
+      className="css-17yj30s-About"
+    >
+      <p>
+        Hi, I'm Sakib Chowdhury. I like making things.
+      </p>
+      <p>
+        You can see some of the things I've made on this site. Just keep scrolling.
+      </p>
+    </div>
+    <a
+      className="css-1ikemrf-About-About"
+      href="/resume-sakib-chowdhury-jan-2021.pdf"
+    >
+      Download Résumé
+    </a>
+  </div>
+</section>
+`;

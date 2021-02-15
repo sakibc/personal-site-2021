@@ -23,10 +23,13 @@ html {
 .fadeOut{
   opacity:0;
   transition: opacity 0.2s;
-
 }
+
 .fadeIn{
   opacity:1;
   transition: opacity 0.2s;
+}
 
+h2 {
+  color: #1767a8;
 }

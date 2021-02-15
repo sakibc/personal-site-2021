@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
-import { cssGlobal } from './global-css'
+import { cssGlobal } from './global'
 import './layout.css'
 
 export default function Layout ({ children }) {

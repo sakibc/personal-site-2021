@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact renders correctly 1`] = `
+<section
+  className="contact-container css-1ftbkmd-cssContainer-cssContainer"
+>
+  <div
+    className="contact-group css-19ccmz-cssGroup-cssGroup-Contact-Contact"
+  >
+    <h2
+      className="css-aezslw-Contact"
+    >
+      Contact
+    </h2>
+    <p
+      className="css-1aoc8q1-Contact"
+    >
+      Send me an email at 
+      <a
+        href="mailto:sakib_c@outlook.com"
+      >
+        sakib_c@outlook.com
+      </a>
+    </p>
+    <h2
+      className="css-xgw9ue-Contact"
+      id="links"
+    >
+      Links
+    </h2>
+    <div
+      className="css-qf7txn-Contact-Contact"
+    />
+    <img
+      alt="cartoon Sakib frantically chiseling a website out of marble"
+      className="css-ozcpui-Contact-Contact"
+      src="test-file-stub"
+      srcSet="test-file-stub 2x, test-file-stub 3x"
+    />
+  </div>
+</section>
+`;

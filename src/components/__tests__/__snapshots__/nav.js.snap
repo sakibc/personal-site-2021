@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav renders correctly 1`] = `
+<nav
+  className="css-lw5b4a-Nav-Nav"
+>
+  <div
+    className="nav-group css-fh7etg-cssGroup-cssGroup-Nav-Nav"
+  >
+    <a
+      href="#about"
+    >
+      About
+    </a>
+    <a
+      href="#projects"
+    >
+      Projects
+    </a>
+    <a
+      href="#contact"
+    >
+      Contact
+    </a>
+    <a
+      href="#links"
+    >
+      Links
+    </a>
+  </div>
+</nav>
+`;
