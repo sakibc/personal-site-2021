@@ -44,25 +44,25 @@ export function CloudsCanvas (ref, loadedCallback) {
 
   this.initialized = false
 
-  this.coveringWidth = 0
-  this.coveringHeight = 0
-  this.max_i = 0
-  this.max_j = 0
-
-  this.clodBuffer = createBuffer(120, 68)
-  this.handsomeClodBuffer = createBuffer(120, 68)
-  this.tinyClodBuffer = createBuffer(90, 51)
-  this.superTinyClodBuffer = createBuffer(30, 17)
-  this.myBuffer = createBuffer(467, 309)
-
-  this.requestId = 0
-
   const canvasAngle = (Math.PI / 180) * (-10)
   const clodXOffset = 200
   const clodYOffset = 100
   const delta_t = 0.2
 
   this.init = () => {
+    this.coveringWidth = 0
+    this.coveringHeight = 0
+    this.max_i = 0
+    this.max_j = 0
+  
+    this.clodBuffer = createBuffer(120, 68)
+    this.handsomeClodBuffer = createBuffer(120, 68)
+    this.tinyClodBuffer = createBuffer(90, 51)
+    this.superTinyClodBuffer = createBuffer(30, 17)
+    this.myBuffer = createBuffer(467, 309)
+  
+    this.requestId = 0
+    
     this.canvas = this.ref.current
   
     this.ctx = this.canvas.getContext('2d')

@@ -19,7 +19,7 @@ export const cssGlobal = css`
   }
 `
 
-export const fontSize = parseInt(getComputedStyle(document.documentElement).fontSize)
+export const fontSize = typeof window !== 'undefined' ? parseInt(getComputedStyle(document.documentElement).fontSize) : null
 
 export function vhpx (value) {
   return window.innerHeight * (value / 100)
