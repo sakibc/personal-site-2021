@@ -47,13 +47,23 @@ export default function Nav () {
 
         a {
           color: white;
-          padding-right: ${rhythm(1)};
+          margin-right: ${rhythm(1)};
           text-decoration: none;
           transition: color 0.2s;
+
+          &:hover {
+            transform: scale3d(1.05, 1.05, 1);
+          }
+
+          &:active {
+            transform: scale3d(1, 1, 1);
+            transition: none;
+            filter: brightness(95%);
+          }
         }
 
         a:last-of-type {
-          padding-right: 0;
+          margin-right: 0;
         }
 
         ${navOverBody && `
@@ -79,14 +89,16 @@ export default function Nav () {
         <a href='#links'>Links</a>
 
         {navOverBody &&
-          <a
-            css={css`
-              flex-grow: 1;
-              text-align: right;
-            `}
-            className={navOverBody ? 'fadeIn' : 'fadeOut'} href='#top'
-          >Back to Top
-          </a>}
+          <div css={css`
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+          `}>
+            <a
+              className={navOverBody ? 'fadeIn' : 'fadeOut'} href='#top'
+            >Back to Top
+            </a>
+          </div>}
       </div>
     </nav>
   )

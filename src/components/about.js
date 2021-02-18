@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
-import { cssContainer, cssGroup } from './global'
+import { cssContainer, cssGroup, hover, active } from './global'
 
 import Standing from '../images/standing.png'
 import Standing2x from '../images/standing@2x.png'
@@ -65,6 +65,9 @@ export default function About ({ id }) {
             border-radius: ${rhythm(2)};
             margin-top: ${rhythm(0.5)};
             box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+
+            ${hover};
+            ${active};
           `}
         >Download Résumé
         </a>

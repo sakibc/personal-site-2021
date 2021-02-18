@@ -2,6 +2,7 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
+import { hover, active } from '../global'
 
 export default function GalleryItem({ index, node, itemMaximized, parentMaximized,
   maximizeCallback, minimizeCallback }) {
@@ -67,6 +68,10 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
           width: 100%;
           background: #fff;
           border: none;
+
+          ${hover};
+          ${active};
+
         `}>{node.childMarkdownRemark.frontmatter.title}</button>
       </div>
     )
