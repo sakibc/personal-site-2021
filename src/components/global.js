@@ -28,3 +28,22 @@ export function vhpx (value) {
 export function rhythmpx (value) {
   return fontSize * parseFloat(rhythm(value))
 }
+
+export const hover = css`
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: scale3d(1.05, 1.05, 1);
+    box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+`
+
+export const active = css`
+  &:active {
+    transform: scale3d(1, 1, 1);
+    transition: none;
+    filter: brightness(95%);
+    box-shadow: inset 5px 5px 15px 0px rgba(0,0,0,0.1);
+  }
+`
