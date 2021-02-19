@@ -25,6 +25,10 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
           "images copy";
         column-gap: ${rhythm(1)};
 
+        .gatsby-image-wrapper, img {
+          margin: 0;
+        }
+
         h3 {
           margin-top: 0;
         }
@@ -42,11 +46,29 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
             onClick={() => minimizeCallback(index)}
           >Close</button>
         </div>
-        <div css={css`grid-area: images;`}>
-          {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-            <Img key={index} fixed={image.childImageSharp.fixed} />
-          ))}
-        </div>
+        
+        {
+          (node.childMarkdownRemark.frontmatter.images.length > 1)
+          ? <div css={css`
+              grid-area: images;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+
+              .gatsby-image-wrapper, img {
+                margin: 0;
+              }
+            `}>
+                {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
+                  <Img fluid={image.childImageSharp.fluid} />
+                ))}
+            </div>
+          : <Img
+              css={css`
+                grid-area: images;
+              `}
+              fluid={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.fluid} />
+        }
 
         <div css={css`grid-area: copy;`} dangerouslySetInnerHTML={{ __html: node.childMarkdownRemark.html }} />
       </div>
@@ -68,11 +90,36 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
           width: 100%;
           background: #fff;
           border: none;
+          padding: 0;
 
           ${hover};
           ${active};
 
-        `}>{node.childMarkdownRemark.frontmatter.title}</button>
+          :hover {
+            p {
+              padding-bottom: ${rhythm(1)};
+            }
+          }
+
+          :active {
+            border: none;
+          }
+        `}>
+          <Img
+            fluid={node.childMarkdownRemark.frontmatter.thumb.childImageSharp.fluid} />
+          <p css={css`
+            color: white;
+            background: rgba(0,0,0,0.2);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: ${rhythm(0.5)} 0;
+            margin: 0;
+            transition: padding 0.2s;
+          `}>{node.childMarkdownRemark.frontmatter.title}</p>
+        </button>
       </div>
     )
   }

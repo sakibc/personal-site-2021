@@ -33,8 +33,15 @@ query {
             title
             images {
               childImageSharp {
-                fixed {
-                  ...GatsbyImageSharpFixed
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+            thumb {
+              childImageSharp {
+                fluid {
+									...GatsbyImageSharpFluid
                 }
               }
             }

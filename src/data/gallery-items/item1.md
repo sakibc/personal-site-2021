@@ -1,5 +1,6 @@
 ---
 title: Item 1
+thumb: "./img4.png"
 images:
   - "./img4.png"
 ---
