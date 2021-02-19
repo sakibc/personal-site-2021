@@ -3,9 +3,16 @@ import Img from 'gatsby-image'
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
 import { hover, active } from '../global'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { Carousel } from 'react-responsive-carousel'
 
 export default function GalleryItem({ index, node, itemMaximized, parentMaximized,
   maximizeCallback, minimizeCallback }) {
+
+  const customThumbs = (children) => children.map((image) => {
+    return <img src={image.props.fluid.src} />
+  })
+
   if (itemMaximized) {
     return (
       <div css={css`
@@ -55,13 +62,25 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               height: 100%;
               overflow: hidden;
 
-              .gatsby-image-wrapper, img {
+              .gatsby-image-wrapper, .axis-vertical, img {
                 margin: 0;
               }
+
+              .thumbs {
+                margin: ${rhythm(0.5)} 0 0 0;
+
+                font-size: 0;
+              }
+
+              .thumb {
+                margin-bottom: 0;
+              }
             `}>
+              <Carousel renderThumbs={customThumbs} showStatus={false} dynamicHeight={true}>
                 {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-                  <Img fluid={image.childImageSharp.fluid} />
-                ))}
+                    <Img key={index} fluid={image.childImageSharp.fluid} />
+                  ))}
+              </Carousel>                
             </div>
           : <Img
               css={css`

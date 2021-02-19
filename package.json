@@ -29,6 +29,7 @@
     "gatsby-transformer-sharp": "^2.11.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-responsive-carousel": "^3.2.12",
     "react-typist": "^2.0.5",
     "react-typography": "^0.16.19",
     "sass": "^1.32.8",
