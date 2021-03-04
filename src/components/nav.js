@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
-import { cssGroup, rhythmpx, vhpx } from './global'
+import { cssGroup, hoverSimple, activeSimple, rhythmpx, vhpx } from './global'
 import { rhythm } from '../utils/typography'
 
 export default function Nav () {
@@ -51,15 +51,8 @@ export default function Nav () {
           text-decoration: none;
           transition: color 0.2s;
 
-          &:hover {
-            transform: scale3d(1.05, 1.05, 1);
-          }
-
-          &:active {
-            transform: scale3d(1, 1, 1);
-            transition: none;
-            filter: brightness(95%);
-          }
+          ${hoverSimple};
+          ${activeSimple};
         }
 
         a:last-of-type {

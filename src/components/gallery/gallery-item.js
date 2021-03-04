@@ -2,7 +2,7 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
-import { hover, active } from '../global'
+import { hover, active, hoverSimple, activeSimple } from '../global'
 
 export default function GalleryItem({ index, node, itemMaximized, parentMaximized,
   maximizeCallback, minimizeCallback }) {
@@ -43,8 +43,18 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
         `}>
           <h3 css={css`grid-area: title;`}>{node.childMarkdownRemark.frontmatter.title}</h3>
           <button
+            css={css`
+              border: none;
+              background: none;
+              margin-bottom: ${rhythm(1)};
+              padding: 0;
+
+              ${hoverSimple};
+              ${activeSimple};
+            `}
             onClick={() => minimizeCallback(index)}
-          >Close</button>
+            title="Close Item" aria-label="Close Item"
+          >✕</button>
         </div>
         
         {
@@ -60,7 +70,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               }
             `}>
                 {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-                  <Img fluid={image.childImageSharp.fluid} />
+                  <Img key={index} fluid={image.childImageSharp.fluid} />
                 ))}
             </div>
           : <Img

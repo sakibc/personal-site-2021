@@ -47,3 +47,17 @@ export const active = css`
     box-shadow: inset 5px 5px 15px 0px rgba(0,0,0,0.1);
   }
 `
+
+export const hoverSimple = css`
+  &:hover {
+    transform: scale3d(1.05, 1.05, 1);
+  }
+`
+
+export const activeSimple = css`
+  &:active {
+    transform: scale3d(1, 1, 1);
+    transition: none;
+    filter: brightness(95%);
+  }
+`
