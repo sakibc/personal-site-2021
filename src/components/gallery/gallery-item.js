@@ -6,6 +6,7 @@ import { hover, active, hoverSimple, activeSimple } from '../global'
 
 export default function GalleryItem({ index, node, itemMaximized, parentMaximized,
   maximizeCallback, minimizeCallback }) {
+
   if (itemMaximized) {
     return (
       <div css={css`
@@ -65,13 +66,23 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               height: 100%;
               overflow: hidden;
 
-              .gatsby-image-wrapper, img {
+              .gatsby-image-wrapper, .axis-vertical, img {
                 margin: 0;
               }
+
+              .thumbs {
+                margin: ${rhythm(0.5)} 0 0 0;
+
+                font-size: 0;
+              }
+
+              .thumb {
+                margin-bottom: 0;
+              }
             `}>
-                {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-                  <Img key={index} fluid={image.childImageSharp.fluid} />
-                ))}
+              {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
+                <Img key={index} fluid={image.childImageSharp.fluid} />
+              ))}
             </div>
           : <Img
               css={css`
