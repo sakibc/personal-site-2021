@@ -21,7 +21,6 @@ export default function Layout ({ children }) {
           }
         `}
       >
-        <p>Made with Gatsby and React</p>
         <p>&copy; 2021 Sakib Chowdhury - All rights reserved</p>
       </footer>
     </div>

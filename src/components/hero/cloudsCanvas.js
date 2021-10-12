@@ -80,12 +80,14 @@ export function CloudsCanvas (ref, loadedCallback) {
       const handsomeBuffers = [this.handsomeClodBuffer, this.tinyClodBuffer, this.superTinyClodBuffer]
       handsomeBuffers.map(buffer => loadBuffer(buffer, imgs[2]))
 
-      changeBufferColor(this.tinyClodBuffer, '#e9fcff')
-      changeBufferColor(this.superTinyClodBuffer, '#c6f7ff')
+      changeBufferColor(this.clodBuffer, '#7AC1D4')
+      changeBufferColor(this.handsomeClodBuffer, '#7AC1D4')
+      changeBufferColor(this.tinyClodBuffer, '#45B8D6')
+      changeBufferColor(this.superTinyClodBuffer, '#1DA7CB')
       drawOnBuffer(this.superTinyClodBuffer, imgs[3], 15, 4, 15, 6)
 
       const clodBuffers = [this.clodBuffer, this.handsomeClodBuffer, this.tinyClodBuffer, this.superTinyClodBuffer]
-      clodBuffers.map(buffer => changeBufferColor(buffer, 'rgba(0, 20, 50, 0.45)'))
+      // clodBuffers.map(buffer => changeBufferColor(buffer, 'rgba(0, 20, 50, 0.45)'))
 
       this.resize(this.canvas, true)
       this.loadedCallback()

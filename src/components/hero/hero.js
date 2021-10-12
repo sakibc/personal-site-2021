@@ -20,7 +20,7 @@ export default function Hero ({ id }) {
       css={css`
         ${cssContainer};
         height: 80vh;
-        background: #1767a8;
+        background: #0098BF;
       `}
     >
       {loaded && <div
@@ -35,14 +35,14 @@ export default function Hero ({ id }) {
         h1 {
           font-size: ${rhythm(4)};
           margin: 0;
-          line-height: 0.9;
+          line-height: 1;
           color: white;
-          text-shadow: ${rhythm(0.2)} ${rhythm(0.3)} #000;
+          text-shadow: ${rhythm(0.16)} ${rhythm(0.25)} #000;
         }
         h2 {
           font-size: ${rhythm(2)};
           margin: 0;
-          padding-left: ${rhythm(1.7)};
+          padding-left: ${rhythm(0.8)};
           color: white;
           text-shadow: ${rhythm(0.08)} ${rhythm(0.15)} #000;
           text-align: left;
@@ -57,23 +57,23 @@ export default function Hero ({ id }) {
               element: '▍',
               hideWhenDone: true
             }}
-            onTypingDone={() => { setInterval(() => { setTypeTagline(true) }, 1000) }}
           >
-            <Typist.Delay ms={500} />
+            <Typist.Delay ms={100} />
             Sakib Chowdhury
           </Typist>
         </h1>
-        {typeTagline && <h2>
+        <h2>
           <Typist
-            avgTypingDelay={35}
+            avgTypingDelay={10}
             cursor={{
-              element: '▍'
+              element: '▍',
+              hideWhenDone: true
             }}
           >
-            <Typist.Delay ms={1500} />
-            artist, engineer
+            <Typist.Delay ms={100} />
+            artist, engineering intern (EIT)
           </Typist>
-        </h2>}
+        </h2>
       </div>}
       <Clouds loadedCallback={loadedCallback}/>
     </section>
