@@ -56,8 +56,9 @@ export const hoverSimple = css`
 
 export const activeSimple = css`
   &:active {
-    transform: scale3d(1, 1, 1);
+    /* transform: scale3d(1, 1, 1); */
     transition: none;
-    filter: brightness(95%);
+    /* filter: brightness(95%); */
+    background: #f2f2f2;
   }
 `

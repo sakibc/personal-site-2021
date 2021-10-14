@@ -11,7 +11,9 @@ export default function Nav () {
   const handleScroll = () => {
     if (throttleTimeout === null) {
       throttleTimeout = setInterval(() => {
-        if (window.scrollY >= vhpx(80) - rhythmpx(2)) {
+        const windowScrollY = window.scrollY
+        if (((windowScrollY >= vhpx(80) - rhythmpx(2)) && (vhpx(80) < 800)) ||
+            ((windowScrollY >= 800 - rhythmpx(2)) && (vhpx(80) >= 800))) {
           if (!navOverBody) {
             setNavOverBody(true)
           }
@@ -32,21 +34,29 @@ export default function Nav () {
   })
 
   return (
-    <nav
+    <nav css={css`
+      position: sticky;
+      height: ${rhythm(2)};
+      top: 0;
+      z-index: 0;
+    `}>
+    <div
       css={css`
         display: flex;
         justify-content: center;
         /* align-items: center; */
         background-color: white;
-        position: sticky;
         height: ${rhythm(2)};
         top: 0;
         /* margin-top: -${rhythm(2)}; */
-        z-index: 10;
+        /* z-index: 1; */
         transition: background 0.2s, box-shadow 0.2s;
         /* text-shadow: ${rhythm(0.04)} ${rhythm(0.06)} #000; */
+        box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
 
         a {
+          /* z-index: 0; */
+          position: relative;
           color: black;
           background: white;
           padding: 0 ${rhythm(0.5)};
@@ -73,16 +83,32 @@ export default function Nav () {
 
         ${navOverBody && `
           background-color: white;
-          // box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
           text-shadow: none;
           a {
-
+            &::after {
+              content: '';
+              position: absolute;
+              height: 100%;
+              width: 100%;
+              background-color: white;
+              top: 0;
+              left: 0;
+              z-index: -10;
+              transition: box-shadow 0.05s;
+            }
             &:hover {
               transform: none;
               padding-bottom: 0;
               padding-top: ${rhythm(0.5)};
               height: ${rhythm(2.5)};
-              // box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
+              &::after {
+                box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
+              }
+            }
+            &:active {
+              &::after {
+                z-index: -10;
+              }
             }
           }
         `}
@@ -112,6 +138,7 @@ export default function Nav () {
             </a>
           </div>}
       </div>
+    </div>
     </nav>
   )
 }

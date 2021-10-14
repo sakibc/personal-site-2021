@@ -3,6 +3,16 @@ import Img from 'gatsby-image'
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
 import { hover, active, hoverSimple, activeSimple } from '../global'
+import Slider from 'react-slick'
+import './slick.scss'
+import './slick-theme.scss'
+
+const settings = {
+  dots: true,
+  infinite: false,
+  slidesToShow: 1,
+  slidesToScroll: 1
+}
 
 export default function GalleryItem({ index, node, itemMaximized, parentMaximized,
   maximizeCallback, minimizeCallback }) {
@@ -64,25 +74,19 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               grid-area: images;
               width: 100%;
               height: 100%;
+              font-size: 0;
               overflow: hidden;
+              border-style: solid;
 
               .gatsby-image-wrapper, .axis-vertical, img {
                 margin: 0;
               }
-
-              .thumbs {
-                margin: ${rhythm(0.5)} 0 0 0;
-
-                font-size: 0;
-              }
-
-              .thumb {
-                margin-bottom: 0;
-              }
             `}>
-              {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-                <Img key={index} fluid={image.childImageSharp.fluid} />
-              ))}
+              <Slider {...settings}>
+                {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
+                  <Img key={index} fluid={image.childImageSharp.fluid} />
+                ))}
+              </Slider>
             </div>
           : <Img
               css={css`
