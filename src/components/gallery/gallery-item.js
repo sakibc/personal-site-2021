@@ -16,7 +16,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
         padding: ${rhythm(1)};
         /* margin-bottom: ${rhythm(1)}; */
       
-        border-radius: ${rhythm(1)};
+        /* border-radius: ${rhythm(1)}; */
 
         display: grid;
         grid-template-rows: auto 1fr;

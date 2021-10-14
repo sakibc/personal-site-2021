@@ -36,22 +36,34 @@ export default function Nav () {
       css={css`
         display: flex;
         justify-content: center;
-        align-items: center;
+        /* align-items: center; */
+        background-color: white;
         position: sticky;
         height: ${rhythm(2)};
         top: 0;
-        margin-top: -${rhythm(2)};
+        /* margin-top: -${rhythm(2)}; */
         z-index: 10;
         transition: background 0.2s, box-shadow 0.2s;
-        text-shadow: ${rhythm(0.04)} ${rhythm(0.06)} #000;
+        /* text-shadow: ${rhythm(0.04)} ${rhythm(0.06)} #000; */
 
         a {
-          color: white;
-          margin-right: ${rhythm(1)};
+          color: black;
+          background: white;
+          padding: 0 ${rhythm(0.5)};
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          height: ${rhythm(2)};
+          /* margin-right: ${rhythm(1)}; */
           text-decoration: none;
-          transition: color 0.2s;
+          transition: background 0.2s, color 0.2s, transform 0.2s, padding 0.2s, height 0.2s;
 
-          ${hoverSimple};
+          &:hover {
+            transform: translate3d(0, -${rhythm(0.5)}, 0);
+            padding-bottom: ${rhythm(0.5)};
+            height: ${rhythm(2.5)};
+          }
+
           ${activeSimple};
         }
 
@@ -60,11 +72,18 @@ export default function Nav () {
         }
 
         ${navOverBody && `
-          background-color: #faf6f6;
-          box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
+          background-color: white;
+          // box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
           text-shadow: none;
           a {
-            color: black;
+
+            &:hover {
+              transform: none;
+              padding-bottom: 0;
+              padding-top: ${rhythm(0.5)};
+              height: ${rhythm(2.5)};
+              // box-shadow: 0 0 10px 0px rgba(0,0,0,0.1);
+            }
           }
         `}
       `}

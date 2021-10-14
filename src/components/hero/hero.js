@@ -19,60 +19,53 @@ export default function Hero ({ id }) {
       id={id} className='hero-container'
       css={css`
         ${cssContainer};
-        height: 80vh;
+        height: calc(min(800px, 80vh) - ${rhythm(2)});
         background: #0098BF;
       `}
     >
       {loaded && <div
         className='hero-group' css={css`
         ${cssGroup};
-        // display: flex;
-        // flex-flow: column nowrap;
-        // justify-content: center;
-        padding-top: 24vh;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: min(240px, 24vh);
         z-index: 1;
 
         h1 {
+          display: flex;
           font-size: ${rhythm(4)};
-          margin: 0;
+          margin: 0 0 ${rhythm(0.5)} 0;
           line-height: 1;
-          color: white;
-          text-shadow: ${rhythm(0.16)} ${rhythm(0.25)} #000;
+          color: black;
+          background: white;
+          padding: ${rhythm(0.8)};
+          box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.3);
         }
         h2 {
-          font-size: ${rhythm(2)};
+          display: flex;
+          font-size: ${rhythm(1.6)};
           margin: 0;
-          padding-left: ${rhythm(0.8)};
-          color: white;
-          text-shadow: ${rhythm(0.08)} ${rhythm(0.15)} #000;
+          line-height: 1;
+
+          color: black;
+          background: white;
           text-align: left;
+          padding: ${rhythm(0.5)};
+          padding-left: ${rhythm(0.8)};
+          box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.3);
+
         }
 
       `}
       >
         <h1>
-          <Typist
-            avgTypingDelay={35}
-            cursor={{
-              element: '▍',
-              hideWhenDone: true
-            }}
-          >
-            <Typist.Delay ms={100} />
-            Sakib Chowdhury
-          </Typist>
+          Sakib Chowdhury
         </h1>
         <h2>
-          <Typist
-            avgTypingDelay={10}
-            cursor={{
-              element: '▍',
-              hideWhenDone: true
-            }}
-          >
-            <Typist.Delay ms={100} />
-            artist, engineering intern (EIT)
-          </Typist>
+          {/* artist, engineering intern (EIT) */}
+          artist, developer
         </h2>
       </div>}
       <Clouds loadedCallback={loadedCallback}/>

@@ -1,7 +1,7 @@
 import Typography from 'typography'
 
 export const headerFontFamily = [
-  'Dosis',
+  'Space Grotesk',
   'sans-serif'
 ]
 
@@ -11,8 +11,8 @@ const typography = new Typography({
   scaleRatio: 2,
   googleFonts: [
     {
-      name: 'Dosis',
-      styles: ['500']
+      name: 'Space Grotesk',
+      styles: ['400']
     },
     {
       name: 'Open Sans',
@@ -21,7 +21,7 @@ const typography = new Typography({
   ],
   headerFontFamily: headerFontFamily,
   bodyFontFamily: ['Open Sans', 'sans-serif'],
-  headerWeight: '500',
+  headerWeight: '400',
   headerGray: 0,
   bodyGray: 0,
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
@@ -29,7 +29,10 @@ const typography = new Typography({
       textAlign: 'center',
     },
     p: {
-      marginBottom: rhythm(0.3)
+      marginBottom: rhythm(0.3),
+    },
+    a: {
+      fontFamily: ['Space Grotesk'].join(','),
     }
   })
 })

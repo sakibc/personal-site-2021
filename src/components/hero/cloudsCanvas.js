@@ -2,6 +2,8 @@ import Clod from './clod.svg'
 import HandsomeClodImg from './handsome_clod.svg'
 import Glasses from './glasses.svg'
 import Coding from './coding.svg'
+import { rhythmpx } from '../global'
+import { rhythm } from '../../utils/typography'
 
 function loadImage (url) {
   return new Promise((resolve, reject) => {
@@ -12,10 +14,10 @@ function loadImage (url) {
   })
 }
 
-function createBuffer (width, height) {
+function createBuffer (width, height, dpr) {
   const buffer = document.createElement('canvas')
-  buffer.width = width
-  buffer.height = height
+  buffer.width = width*dpr
+  buffer.height = height*dpr
 
   return buffer
 }
@@ -47,19 +49,22 @@ export function CloudsCanvas (ref, loadedCallback) {
   const canvasAngle = (Math.PI / 180) * (-10)
   const clodXOffset = 200
   const clodYOffset = 100
-  const delta_t = 0.2
+  
 
   this.init = () => {
+    this.dpr = window.devicePixelRatio || 1
+    this.delta_t = 0.2*this.dpr
+
     this.coveringWidth = 0
     this.coveringHeight = 0
     this.max_i = 0
     this.max_j = 0
   
-    this.clodBuffer = createBuffer(120, 68)
-    this.handsomeClodBuffer = createBuffer(120, 68)
-    this.tinyClodBuffer = createBuffer(90, 51)
-    this.superTinyClodBuffer = createBuffer(30, 17)
-    this.myBuffer = createBuffer(467, 309)
+    this.clodBuffer = createBuffer(120, 68, this.dpr)
+    this.handsomeClodBuffer = createBuffer(120, 68, this.dpr)
+    this.tinyClodBuffer = createBuffer(90, 51, this.dpr)
+    this.superTinyClodBuffer = createBuffer(30, 17, this.dpr)
+    this.myBuffer = createBuffer(467, 309, this.dpr)
   
     this.requestId = 0
     
@@ -84,7 +89,7 @@ export function CloudsCanvas (ref, loadedCallback) {
       changeBufferColor(this.handsomeClodBuffer, '#7AC1D4')
       changeBufferColor(this.tinyClodBuffer, '#45B8D6')
       changeBufferColor(this.superTinyClodBuffer, '#1DA7CB')
-      drawOnBuffer(this.superTinyClodBuffer, imgs[3], 15, 4, 15, 6)
+      drawOnBuffer(this.superTinyClodBuffer, imgs[3], 15*this.dpr, 4*this.dpr, 15*this.dpr, 6*this.dpr)
 
       const clodBuffers = [this.clodBuffer, this.handsomeClodBuffer, this.tinyClodBuffer, this.superTinyClodBuffer]
       // clodBuffers.map(buffer => changeBufferColor(buffer, 'rgba(0, 20, 50, 0.45)'))
@@ -115,16 +120,16 @@ export function CloudsCanvas (ref, loadedCallback) {
 
   function TinyClod (y, parent) {
     this.parent = parent
-    this.x = -(this.parent.coveringWidth - this.parent.canvas.width) / 2 - this.parent.tinyClodBuffer.width
+    this.x = -(this.parent.coveringWidth - this.parent.displayWidth) / 2 - this.parent.tinyClodBuffer.width
     this.y = y
     this.live = true
     this.superTiny = (Math.random() > 0.8)
 
     this.update = function () {
       if (this.superTiny) {
-        this.x += 1.2
+        this.x += 1.2*this.parent.dpr
       } else {
-        this.x += 0.4
+        this.x += 0.4*this.parent.dpr
       }
       if (this.x > this.parent.coveringWidth) {
         this.live = false
@@ -143,18 +148,18 @@ export function CloudsCanvas (ref, loadedCallback) {
   }
 
   this.resize = (canvas, init = false) => {
-    const displayWidth = canvas.clientWidth
-    const displayHeight = canvas.clientHeight
+     this.displayWidth = Math.floor(canvas.clientWidth*this.dpr)
+     this.displayHeight = Math.floor(canvas.clientHeight*this.dpr)
 
-    if ((displayWidth !== canvas.width ||
-        displayHeight !== canvas.height) || init) {
-      this.coveringWidth = Math.ceil(displayWidth * Math.cos(Math.abs(canvasAngle)) +
-                            displayHeight * Math.sin(Math.abs(canvasAngle)))
-      this.coveringHeight = Math.ceil(displayWidth * Math.sin(Math.abs(canvasAngle)) +
-                             displayHeight * Math.cos(Math.abs(canvasAngle)))
+    if ((this.displayWidth !== canvas.width ||
+        this.displayHeight !== canvas.height) || init) {
+      this.coveringWidth = Math.ceil(this.displayWidth * Math.cos(Math.abs(canvasAngle)) +
+                            this.displayHeight * Math.sin(Math.abs(canvasAngle)))
+      this.coveringHeight = Math.ceil(this.displayWidth * Math.sin(Math.abs(canvasAngle)) +
+                             this.displayHeight * Math.cos(Math.abs(canvasAngle)))
 
-      canvas.width = displayWidth
-      canvas.height = displayHeight
+      canvas.width = this.displayWidth
+      canvas.height = this.displayHeight
 
       this.max_i = (this.coveringWidth / clodXOffset) + 1
       this.max_j = (this.coveringHeight / clodYOffset) + 1
@@ -171,19 +176,24 @@ export function CloudsCanvas (ref, loadedCallback) {
     return false
   }
 
-  this.drawCanvas = () => {
+  this.resetTransform = () => {
     this.ctx.resetTransform()
+    // this.ctx.scale(this.dpr, this.dpr)
+  }
 
+  this.drawCanvas = () => {
     this.resize(this.canvas)
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.resetTransform()
 
-    this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2)
+    this.ctx.clearRect(0, 0, this.displayWidth, this.displayHeight)
+
+    this.ctx.translate(this.displayWidth / 2, this.displayHeight / 2)
     this.ctx.rotate(canvasAngle)
-    this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2)
+    this.ctx.translate(-this.displayWidth / 2, -this.displayHeight / 2)
 
     // generate and draw tiny clouds
     if (Math.random() > 0.9975) {
-      const obj = new TinyClod(Math.floor(Math.random() * this.canvas.height), this)
+      const obj = new TinyClod(Math.floor(Math.random() * this.displayHeight), this)
       this.tinyClods.push(obj)
     }
 
@@ -206,10 +216,10 @@ export function CloudsCanvas (ref, loadedCallback) {
     // draw large clouds
     for (let i = 0; i < this.max_i; i++) {
       for (let j = 0; j < this.max_j; j++) {
-        // const oldX = -(coveringWidth - canvas.width)/2 - 240 + i*clodXOffset + oldTick + (j%2)*(clodXOffset/2);
+        // const oldX = -(coveringWidth - displayWidth)/2 - 240 + i*clodXOffset + oldTick + (j%2)*(clodXOffset/2);
 
-        const x = -(this.coveringWidth - this.canvas.width) / 2 - 240 + i * clodXOffset + this.tick + (j % 2) * (clodXOffset / 2)
-        const y = -(this.coveringHeight - this.canvas.height) / 2 - 30 + j * clodYOffset
+        const x = -(this.coveringWidth - this.displayWidth) / 2 - 240*this.dpr + i * clodXOffset*this.dpr + this.tick + (j % 2) * (clodXOffset*this.dpr / 2)
+        const y = -(this.coveringHeight - this.displayHeight) / 2 - 30*this.dpr + j * clodYOffset*this.dpr
 
         // ctx.clearRect(oldX-1, y-1, clodBuffer.width+2, clodBuffer.height+2);
 
@@ -230,9 +240,9 @@ export function CloudsCanvas (ref, loadedCallback) {
       }
     }
 
-    this.tick += delta_t
+    this.tick += this.delta_t
 
-    if (this.tick >= clodXOffset) {
+    if (this.tick >= clodXOffset*this.dpr) {
       this.tick = 0
 
       const tempClods = []
@@ -248,14 +258,29 @@ export function CloudsCanvas (ref, loadedCallback) {
       this.handsomeClods = tempClods
     }
 
-    this.ctx.resetTransform()
+    this.resetTransform()
 
-    this.ctx.translate(0, this.canvas.height - 150)
+    this.ctx.translate(0, this.displayHeight - 150)
     this.ctx.fillStyle = this.lowerGradient
-    this.ctx.fillRect(0, 0, this.canvas.width, 150)
-    this.ctx.resetTransform()
+    this.ctx.fillRect(0, 0, this.displayWidth, 150)
+    this.resetTransform()
 
-    this.ctx.drawImage(this.myBuffer, (this.canvas.width / 2) - 50, this.canvas.height - this.myBuffer.height + 50)
+    const lineWidth = 10*this.dpr
+    const borderGap = 20*this.dpr
+    this.ctx.lineWidth = lineWidth
+    this.ctx.strokeStyle = '#FFF'
+
+    if (this.displayWidth > 1280*this.dpr) {
+      this.ctx.strokeRect((this.displayWidth - 1280*this.dpr)/2 + lineWidth/2 + borderGap, lineWidth/2 + borderGap,
+        1280*this.dpr - lineWidth - 2*borderGap, this.displayHeight - lineWidth - 2*borderGap)
+    } else {
+      this.ctx.strokeRect(lineWidth/2 + borderGap, lineWidth/2 + borderGap,
+        this.displayWidth - lineWidth - 2*borderGap, this.displayHeight - lineWidth - 2*borderGap)
+    }
+
+    this.resetTransform()
+
+    this.ctx.drawImage(this.myBuffer, (this.displayWidth / 2) + 50*this.dpr, this.displayHeight - this.myBuffer.height + rhythmpx(2))
 
     this.requestId = requestAnimationFrame(this.drawCanvas)
   }
