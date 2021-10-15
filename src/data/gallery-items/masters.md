@@ -4,6 +4,6 @@ thumb: "./img4.png"
 images:
   - "./img4.png"
 ---
-Soufflé jelly-o I love halvah topping ice cream dessert. Soufflé powder lemon drops chupa chups I love danish sugar plum. Bear claw I love macaroon muffin croissant. Jelly-o oat cake jelly-o pie toffee halvah dragée pastry. Marshmallow lollipop toffee ice cream.
+I did my Master's thesis on skip lists in persistent memory. I'll upload it here as soon as the paperwork to let me upload it to the UWaterloo website is complete.
 
-Dessert donut I love ice cream croissant tiramisu gingerbread macaroon chupa chups.
+In the meantime, you can read this brief announcement of some of my thesis' work that was published at SPAA 2021.

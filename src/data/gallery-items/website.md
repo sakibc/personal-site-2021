@@ -5,6 +5,6 @@ images:
   - "./img4.png"
   - "./img5.png"
 ---
-Liquorice chocolate cake chupa chups candy canes dragée powder sesame snaps jelly-o. Wafer lollipop topping cookie cookie. Soufflé chocolate bar carrot cake bear claw chupa chups chocolate marshmallow I love. Cheesecake dessert sweet bear claw. Icing I love marzipan fruitcake icing chupa chups jujubes fruitcake.
+I've had half a portfolio website built and kept on the backburner of my solid state drive for years now, but with my Master's finished it's time I got a polished product out I can use to showcase my most interesting works. This site's built using Gatsby, which is a JavaScript framework for generating static sites with React and GraphQL. To add new portfolio items, I just add a new Markdown file and some images to the data folder of my website. GraphQL and React handle the rest.
 
-I love I love brownie. Carrot cake halvah bear claw marzipan.
+You can check out the code for this website here on GitHub. I'll be improving it every once in a while, so check back soon.
