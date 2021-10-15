@@ -1,5 +1,5 @@
 ---
-title: Item 2
+title: Master's Thesis
 thumb: "./img4.png"
 images:
   - "./img4.png"
