@@ -35,6 +35,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
           "images title"
           "images copy";
         column-gap: ${rhythm(1)};
+        max-height: 600px;
 
         .gatsby-image-wrapper, img {
           margin: 0;
@@ -42,6 +43,10 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
 
         h3 {
           margin-top: 0;
+        }
+
+        p {
+          margin-bottom: ${rhythm(0.5)};
         }
 
         p:last-child {
@@ -95,7 +100,11 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               fluid={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.fluid} />
         }
 
-        <div css={css`grid-area: copy;`} dangerouslySetInnerHTML={{ __html: node.childMarkdownRemark.html }} />
+        <div css={css`
+          grid-area: copy;
+          height: 100%;
+          overflow: auto;
+        `} dangerouslySetInnerHTML={{ __html: node.childMarkdownRemark.html }} />
       </div>
     )
   } else if (!parentMaximized) {
@@ -104,12 +113,14 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
         width: calc((100% - ${rhythm(3)})/4);
         padding-bottom: calc((100% - ${rhythm(3)})/4);
         position: relative;
+        margin-bottom: ${rhythm(1)};
       `}>
         <button
           onClick={() => maximizeCallback(index)}
           css={css`
           box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
           position: absolute;
+          overflow: hidden;
           top: 0;
           bottom: 0;
           width: 100%;
@@ -134,7 +145,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
             fluid={node.childMarkdownRemark.frontmatter.thumb.childImageSharp.fluid} />
           <p css={css`
             color: white;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.4);
             position: absolute;
             bottom: 0;
             left: 0;
