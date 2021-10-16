@@ -31,7 +31,7 @@ export default function Gallery ({ id, data }) {
   return (
     <section id={id} className='gallery-container' css={cssContainer}>
       <div className='gallery-group' css={cssGroup}>
-        <h2>Gallery</h2>
+        <h2>Recent Projects</h2>
 
         <div css={css`
           display: flex;

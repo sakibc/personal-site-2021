@@ -1,6 +1,7 @@
 ---
 title: Project SuperLIMBinal
 thumb: "./capstone/hand-phone.jpg"
+order: 3
 images:
   - "./capstone/hand-open.jpg"
   - "./capstone/hand-closed.jpg"

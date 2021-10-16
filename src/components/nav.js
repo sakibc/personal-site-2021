@@ -122,7 +122,7 @@ export default function Nav () {
       `}
       >
         <a href='#about'>About</a>
-        <a href='#gallery'>Gallery</a>
+        <a href='#gallery'>Recent Projects</a>
         <a href='#contact'>Contact</a>
         <a href='#links'>Links</a>
 

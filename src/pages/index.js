@@ -24,7 +24,7 @@ export default IndexPage
 
 export const query = graphql`
 query {
-  allFile(filter: {relativeDirectory: {eq: "gallery-items"}, extension: {eq: "md"}}, sort: {fields: childrenMarkdownRemark___frontmatter___title}) {
+  allFile(filter: {relativeDirectory: {eq: "gallery-items"}, extension: {eq: "md"}}, sort: {fields: childrenMarkdownRemark___frontmatter___order}) {
     edges {
       node {
         childMarkdownRemark {
