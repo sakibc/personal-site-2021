@@ -1,11 +1,11 @@
 import React from 'react'
-import Img from 'gatsby-image'
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
 import { hover, active, hoverSimple, activeSimple } from '../global'
 import Slider from 'react-slick'
 import './slick.scss'
 import './slick-theme.scss'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const settings = {
   dots: true,
@@ -37,7 +37,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
         column-gap: ${rhythm(1)};
         max-height: 600px;
 
-        .gatsby-image-wrapper, img {
+        img {
           margin: 0;
         }
 
@@ -83,13 +83,13 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               overflow: hidden;
               border-style: solid;
 
-              .gatsby-image-wrapper, .axis-vertical, img {
+              img {
                 margin: 0;
               }
             `}>
               <Slider {...settings}>
                 {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-                  <Img key={index} fluid={image.childImageSharp.fluid} />
+                  <GatsbyImage key={index} image={image.childImageSharp.gatsbyImageData} alt={node.childMarkdownRemark.frontmatter.title} />
                 ))}
               </Slider>
             </div>
@@ -99,7 +99,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
               height: 100%;
               overflow: hidden;
             `}>
-              <Img fluid={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.fluid} />
+              <GatsbyImage image={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.gatsbyImageData} alt={node.childMarkdownRemark.frontmatter.title}/>
             </div>
         }
 
@@ -144,8 +144,11 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
             border: none;
           }
         `}>
-          <Img
-            fluid={node.childMarkdownRemark.frontmatter.thumb.childImageSharp.fluid} />
+          <GatsbyImage
+            image={node.childMarkdownRemark.frontmatter.thumb.childImageSharp.gatsbyImageData}
+            alt={node.childMarkdownRemark.frontmatter.title}
+            loading="eager"
+          />
           <p css={css`
             color: white;
             background: rgba(0,0,0,0.4);

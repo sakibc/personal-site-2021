@@ -14,9 +14,6 @@ export const cssContainer = css`
 `
 
 export const cssGlobal = css`
-  .gatsby-image-wrapper {
-    margin-bottom: ${rhythm(1)};
-  }
 `
 
 export const fontSize = typeof window !== 'undefined' ? parseInt(getComputedStyle(document.documentElement).fontSize) : null

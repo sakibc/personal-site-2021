@@ -33,16 +33,18 @@ query {
             title
             images {
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  layout: FULL_WIDTH
+                  aspectRatio:1
+                )
               }
             }
             thumb {
               childImageSharp {
-                fluid {
-									...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  layout: FULL_WIDTH
+                  aspectRatio:1
+                )
               }
             }
           }
