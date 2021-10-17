@@ -2,11 +2,16 @@ import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
 import { cssGlobal } from './global'
+import { Helmet } from 'react-helmet'
 import './layout.css'
 
 export default function Layout ({ children }) {
   return (
     <div css={cssGlobal}>
+      <Helmet>
+        <meta charSet="utf-8"/>
+        <title>Sakib Chowdhury</title>
+      </Helmet>
       {children}
       <footer
         css={css`

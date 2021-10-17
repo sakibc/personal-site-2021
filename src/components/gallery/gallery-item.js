@@ -93,11 +93,14 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
                 ))}
               </Slider>
             </div>
-          : <Img
-              css={css`
-                grid-area: images;
-              `}
-              fluid={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.fluid} />
+          : <div css={css`
+              grid-area: images;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+            `}>
+              <Img fluid={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.fluid} />
+            </div>
         }
 
         <div css={css`

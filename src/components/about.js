@@ -56,7 +56,7 @@ export default function About ({ id }) {
           <p>You can see some of the things I've made on this site. Just keep scrolling.</p>
         </div>
         <a
-          href='/resume-sakib-chowdhury-jan-2021.pdf' css={css`
+          href='/sakibc_resume_oct_21.pdf' css={css`
             grid-area: resume;
             text-decoration: none;
             background: #1767a8;

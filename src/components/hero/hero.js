@@ -52,8 +52,7 @@ export default function Hero ({ id }) {
           color: black;
           background: white;
           text-align: left;
-          padding: ${rhythm(0.5)};
-          padding-left: ${rhythm(0.8)};
+          padding: ${rhythm(0.5)} ${rhythm(0.8)};
           box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.3);
 
         }
