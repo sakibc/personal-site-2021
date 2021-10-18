@@ -51,7 +51,11 @@ export default function Contact ({ id }) {
       `}
       >
         <h2 css={css`grid-area: title1;`}>Contact</h2>
-        <p css={css`grid-area: copy1; margin: 0;`}>Send me an email at <a href="mailto:sakib_c@outlook.com">sakib_c@outlook.com</a>.</p>
+        <p css={css`
+          grid-area: copy1;
+          margin: 0;
+          text-align: center;
+        `}>Send me an email at <a href="mailto:sakib_c@outlook.com">sakib_c@outlook.com</a>.</p>
 
         <h2 css={css`grid-area: title2;`} id='links'>Links</h2>
         <div css={css`

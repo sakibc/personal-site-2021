@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/react'
-import { cssGroup, hoverSimple, activeSimple, rhythmpx, vhpx } from './global'
+import { cssGroup, hoverSimple, activeSimple, rhythmpx, vhpx, mq } from './global'
 import { rhythm } from '../utils/typography'
 
 export default function Nav () {
@@ -38,7 +38,7 @@ export default function Nav () {
       position: sticky;
       height: ${rhythm(2)};
       top: 0;
-      z-index: 0;
+      z-index: 1;
     `}>
     <div
       css={css`
@@ -128,9 +128,13 @@ export default function Nav () {
 
         {navOverBody &&
           <div css={css`
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
+            display: none;
+
+            ${mq[0]} {
+              flex-grow: 1;
+              display: flex;
+              justify-content: flex-end;
+            }
           `}>
             <a
               className={navOverBody ? 'fadeIn' : 'fadeOut'} href='#top'

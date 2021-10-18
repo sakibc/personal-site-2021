@@ -119,8 +119,12 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
 
         <div css={css`
           grid-area: copy;
-          height: 100%;
-          overflow: auto;
+          
+          ${mq[0]} {
+            height: 100%;
+            overflow: auto;
+          }
+          
         `} dangerouslySetInnerHTML={{ __html: node.childMarkdownRemark.html }} />
       </div>
     )
