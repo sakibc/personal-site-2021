@@ -1,6 +1,11 @@
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
 
+const breakpoints = [600, 900, 1200]
+export const mq = breakpoints.map(
+  bp => `@media (min-width: ${bp}px)`
+)
+
 export const cssGroup = css`
   width: min(100vw, 960px);
   padding: 0 ${rhythm(1)};

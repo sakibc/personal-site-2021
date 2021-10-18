@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
-import { cssContainer, cssGroup, hover, active } from './global'
+import { cssContainer, cssGroup, hover, active, mq } from './global'
 
 import Standing from '../images/standing.png'
 import Standing2x from '../images/standing@2x.png'
@@ -18,23 +18,41 @@ export default function About ({ id }) {
         className='about-group' css={css`
         ${cssGroup};
         display: grid;
-        grid-template-rows: 1fr auto auto auto 1fr;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-          "images space1"
-          "images title"
-          "images copy"
-          "images resume"
-          "images space2";
+        
         justify-items: center;
         align-items: center;
-        grid-gap: ${rhythm(1)};
+
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+          "title title"
+          "images copy"
+          "resume resume";
+        grid-gap: 0;
+        padding: ${rhythm(2)} ${rhythm(1)};
+
+        ${mq[0]} {
+          grid-template-rows: 1fr auto auto auto 1fr;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas:
+            "images space1"
+            "images title"
+            "images copy"
+            "images resume"
+            "images space2";
+          grid-gap: ${rhythm(1)};
+          padding: 0 ${rhythm(1)};
+        }
       `}
       >
         <img
           css={css`
           grid-area: images;
-          margin: ${rhythm(3)} 0 ${rhythm(2)} 0;
+          margin: 0;
+
+          ${mq[0]} {
+            margin: ${rhythm(3)} 0 ${rhythm(2)} 0;
+          }
         `}
           src={Standing}
           alt="cartoon Sakib standing and smiling"

@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../../utils/typography'
-import { hover, active, hoverSimple, activeSimple } from '../global'
+import { hover, active, hoverSimple, activeSimple, mq } from '../global'
 import Slider from 'react-slick'
 import './slick.scss'
 import './slick-theme.scss'
@@ -29,14 +29,32 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
         /* border-radius: ${rhythm(1)}; */
 
         display: grid;
-        grid-template-rows: auto 1fr;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        grid-template-areas:
-          "images title"
-          "images copy";
-        column-gap: ${rhythm(1)};
-        max-height: 600px;
 
+        grid-template-rows: auto auto auto;
+        grid-template-columns: auto;
+        grid-template-areas:
+          "title"
+          "images"
+          "copy";
+
+          p:first-child {
+            margin-top: ${rhythm(1)};
+          }
+
+        ${mq[0]} {
+          grid-template-rows: auto 1fr;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-areas:
+            "images title"
+            "images copy";
+          column-gap: ${rhythm(1)};
+          max-height: 600px;
+
+          p:first-child {
+            margin-top: ${rhythm(0)};
+          }
+        }
+        
         img {
           margin: 0;
         }
@@ -109,10 +127,15 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
   } else if (!parentMaximized) {
     return (
       <div css={css`
-        width: calc((100% - ${rhythm(3)})/4);
-        padding-bottom: calc((100% - ${rhythm(3)})/4);
+        width: calc((100% - ${rhythm(1)})/2);
+        padding-bottom: calc((100% - ${rhythm(1)})/2);
         position: relative;
         margin-bottom: ${rhythm(1)};
+
+        ${mq[0]} {
+          width: calc((100% - ${rhythm(3)})/4);
+          padding-bottom: calc((100% - ${rhythm(3)})/4);
+        }
       `}>
         <button
           onClick={() => maximizeCallback(index)}

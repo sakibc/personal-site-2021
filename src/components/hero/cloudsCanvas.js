@@ -280,7 +280,24 @@ export function CloudsCanvas (ref, loadedCallback) {
 
     this.resetTransform()
 
-    this.ctx.drawImage(this.myBuffer, (this.displayWidth / 2) + 50*this.dpr, this.displayHeight - this.myBuffer.height + rhythmpx(2))
+    if (this.displayWidth > 1200*this.dpr) {
+      this.ctx.drawImage(this.myBuffer, (this.displayWidth / 2) + 50*this.dpr, this.displayHeight - this.myBuffer.height + rhythmpx(2))
+    } else if (this.displayWidth > 700*this.dpr) {
+      const x_0 = 700*this.dpr
+      const x_1 = 1200*this.dpr
+      const y_0 = -(this.myBuffer.width/2)
+      const y_1 = 50*this.dpr
+      const x = this.displayWidth
+      const y = (y_0*(x_1 - x) + y_1*(x - x_0))/(x_1 - x_0)
+
+      this.ctx.drawImage(this.myBuffer, (this.displayWidth/2) + y, this.displayHeight - this.myBuffer.height + rhythmpx(2))
+    } else if (this.displayWidth > 600*this.dpr) {
+      this.ctx.drawImage(this.myBuffer, (this.displayWidth / 2) - this.myBuffer.width/2, this.displayHeight - this.myBuffer.height + rhythmpx(2))
+    } else {
+      const drawWidth = this.displayWidth*0.75;
+      const drawHeight = drawWidth*(this.myBuffer.height/this.myBuffer.width)
+      this.ctx.drawImage(this.myBuffer, (this.displayWidth / 2) - drawWidth/2, this.displayHeight - drawHeight + rhythmpx(2), drawWidth, drawHeight)
+    }
 
     this.requestId = requestAnimationFrame(this.drawCanvas)
   }
