@@ -5,7 +5,7 @@ import { hover, active, hoverSimple, activeSimple } from '../global'
 import Slider from 'react-slick'
 import './slick.scss'
 import './slick-theme.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const settings = {
   dots: true,
@@ -30,7 +30,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
 
         display: grid;
         grid-template-rows: auto 1fr;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         grid-template-areas:
           "images title"
           "images copy";
@@ -77,29 +77,25 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
           (node.childMarkdownRemark.frontmatter.images.length > 1)
           ? <div css={css`
               grid-area: images;
-              width: 100%;
-              height: 100%;
               font-size: 0;
               overflow: hidden;
-              border-style: solid;
 
-              img {
-                margin: 0;
+              .slick-slider {
+                border: solid;
               }
             `}>
-              <Slider {...settings}>
+              <Slider
+              {...settings}>
                 {node.childMarkdownRemark.frontmatter.images.map((image, index) => (
-                  <GatsbyImage key={index} image={image.childImageSharp.gatsbyImageData} alt={node.childMarkdownRemark.frontmatter.title} />
+                  <GatsbyImage key={index} image={getImage(image)} alt={node.childMarkdownRemark.frontmatter.title} />
                 ))}
               </Slider>
             </div>
           : <div css={css`
               grid-area: images;
-              width: 100%;
-              height: 100%;
-              overflow: hidden;
             `}>
-              <GatsbyImage image={node.childMarkdownRemark.frontmatter.images[0].childImageSharp.gatsbyImageData} alt={node.childMarkdownRemark.frontmatter.title}/>
+              <GatsbyImage 
+              image={getImage(node.childMarkdownRemark.frontmatter.images[0])} alt={node.childMarkdownRemark.frontmatter.title}/>
             </div>
         }
 
@@ -145,7 +141,7 @@ export default function GalleryItem({ index, node, itemMaximized, parentMaximize
           }
         `}>
           <GatsbyImage
-            image={node.childMarkdownRemark.frontmatter.thumb.childImageSharp.gatsbyImageData}
+            image={getImage(node.childMarkdownRemark.frontmatter.thumb)}
             alt={node.childMarkdownRemark.frontmatter.title}
             loading="eager"
           />
