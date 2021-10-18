@@ -192,7 +192,7 @@ export function CloudsCanvas (ref, loadedCallback) {
     this.ctx.translate(-this.displayWidth / 2, -this.displayHeight / 2)
 
     // generate and draw tiny clouds
-    if (Math.random() > 0.998) {
+    if (Math.random() > 0.999) {
       const obj = new TinyClod(Math.floor(Math.random() * this.displayHeight), this)
       this.tinyClods.push(obj)
     }
@@ -226,7 +226,7 @@ export function CloudsCanvas (ref, loadedCallback) {
         if (i === 0 && this.tick === 0) {
           // mayhaps consider generating a handsome clod
           // if we're just starting off
-          if (Math.random() > 0.98) {
+          if (Math.random() > 0.97) {
             const obj = new HandsomeClod(i, j, this)
             this.handsomeClods.push(obj)
           }
