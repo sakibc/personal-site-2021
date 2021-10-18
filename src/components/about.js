@@ -59,7 +59,7 @@ export default function About ({ id }) {
           href='/sakibc_resume_oct_21.pdf' css={css`
             grid-area: resume;
             text-decoration: none;
-            background: #1767a8;
+            background: #007BA7;
             color: white;
             padding: ${rhythm(0.75)} ${rhythm(1)};
             border-radius: ${rhythm(2)};
