@@ -76,7 +76,7 @@ export default function About ({ id }) {
           <p>You can see some of the things I've made on this site. Just keep scrolling.</p>
         </div>
         <a
-          href='/sakibc_resume_oct_21.pdf' css={css`
+          href='/sakibc_resume_nov_21.pdf' css={css`
             grid-area: resume;
 
             ${bodyButton};
