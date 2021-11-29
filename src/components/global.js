@@ -18,6 +18,16 @@ export const cssContainer = css`
   scroll-margin-top: calc(${rhythm(2)} - 1px);
 `
 
+export const bodyButton = css`
+  margin-top: ${rhythm(0.5)};
+  text-decoration: none;
+  background: #007BA7;
+  color: white;
+  padding: ${rhythm(0.75)} ${rhythm(1)};
+  border-radius: ${rhythm(2)};
+  box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
+`
+
 export const cssGlobal = css`
 `
 

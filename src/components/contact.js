@@ -2,7 +2,10 @@ import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
 
-import { cssContainer, cssGroup, mq } from './global'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { RiInstagramFill } from 'react-icons/ri'
+
+import { hover, active, bodyButton, cssContainer, cssGroup, mq } from './global'
 
 import Development from '../images/development.png'
 import Development2x from '../images/development@2x.png'
@@ -64,9 +67,31 @@ export default function Contact ({ id }) {
           flex-flow: column nowrap;
           align-items: center;
         `}>
-          <a href="https://github.com/sakibc">GitHub</a>
-          <a href="https://www.linkedin.com/in/sakib-chowdhury">LinkedIn</a>
-          <a href="https://www.instagram.com/skbby_c/">Instagram</a>
+          <a href="https://github.com/sakibc" css={css`
+            ${bodyButton};
+            ${hover};
+            ${active};
+
+            margin-top: 0;
+            width: 100%;
+            text-align: center;
+          `}><FaGithub/> GitHub</a>
+          <a href="https://www.linkedin.com/in/sakib-chowdhury" css={css`
+            ${bodyButton};
+            ${hover};
+            ${active};
+
+            width: 100%;
+            text-align: center;
+          `}><FaLinkedin/> LinkedIn</a>
+          <a href="https://www.instagram.com/skbby_c/" css={css`
+            ${bodyButton};
+            ${hover};
+            ${active};
+
+            width: 100%;
+            text-align: center;
+          `}><RiInstagramFill/> Instagram</a>
         </div>
 
         <img css={css`

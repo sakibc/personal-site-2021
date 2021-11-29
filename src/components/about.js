@@ -1,7 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { rhythm } from '../utils/typography'
-import { cssContainer, cssGroup, hover, active, mq } from './global'
+import { cssContainer, cssGroup, hover, active, mq, bodyButton } from './global'
+
+import { FaFileDownload } from 'react-icons/fa'
 
 import Standing from '../images/standing.png'
 import Standing2x from '../images/standing@2x.png'
@@ -76,18 +78,12 @@ export default function About ({ id }) {
         <a
           href='/sakibc_resume_oct_21.pdf' css={css`
             grid-area: resume;
-            text-decoration: none;
-            background: #007BA7;
-            color: white;
-            padding: ${rhythm(0.75)} ${rhythm(1)};
-            border-radius: ${rhythm(2)};
-            margin-top: ${rhythm(0.5)};
-            box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.1);
 
+            ${bodyButton};
             ${hover};
             ${active};
           `}
-        >Download Résumé
+        ><FaFileDownload/> Download Résumé
         </a>
       </div>
     </section>
