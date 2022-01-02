@@ -26,7 +26,7 @@ export default function Layout ({ children }) {
           }
         `}
       >
-        <p>&copy; 2021 Sakib Chowdhury - All rights reserved</p>
+        <p>&copy; 2022 Sakib Chowdhury - All rights reserved</p>
       </footer>
     </div>
   )
