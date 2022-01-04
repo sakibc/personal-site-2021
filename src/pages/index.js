@@ -8,24 +8,27 @@ import Gallery from '../components/gallery/gallery'
 import About from '../components/about'
 import Contact from '../components/contact'
 
+// Check if in browser or SSR
+const isBrowser = typeof window !== "undefined"
 
 // smoothscrolling in Safari from
 // https://jonaskuske.github.io/smoothscroll-anchor-polyfill/#start
 
-if (!('scrollBehavior' in document.documentElement.style)) {
+if (isBrowser) {
+  if (!('scrollBehavior' in document.documentElement.style)) {
 
-  // Wait until the Polyfills are loaded
-  Promise.all([
-    import('smoothscroll-polyfill'),
-    import('smoothscroll-anchor-polyfill')
-  ])
-  // then use the modules however you want
-  .then(([smoothscrollPolyfill, smoothscrollAnchorPolyfill]) => {
-    // (Unlike this package, smoothscroll-polyfill needs to be actively invoked: )
-    smoothscrollPolyfill.polyfill();
-  });
+    // Wait until the Polyfills are loaded
+    Promise.all([
+      import('smoothscroll-polyfill'),
+      import('smoothscroll-anchor-polyfill')
+    ])
+    // then use the modules however you want
+    .then(([smoothscrollPolyfill, smoothscrollAnchorPolyfill]) => {
+      // (Unlike this package, smoothscroll-polyfill needs to be actively invoked: )
+      smoothscrollPolyfill.polyfill();
+    });
+  }
 }
-
 
 const IndexPage = ({ data }) => {
   return (
