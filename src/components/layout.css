@@ -1,4 +1,8 @@
 html {
+  /* smoothscrolling in Safari from
+   * https://jonaskuske.github.io/smoothscroll-anchor-polyfill/#start
+   */
+  --scroll-behavior: smooth;
   scroll-behavior: smooth;
 }
 
