@@ -14,12 +14,4 @@ pipeline {
             }
         }
     }
-    post {
-      failure {
-        updateGitlabCommitStatus name: 'Jenkins', state: 'failed'
-      }
-      success {
-        updateGitlabCommitStatus name: 'Jenkins', state: 'success'
-      }
-    }
 }
